@@ -29,6 +29,10 @@ export default function App() {
     setSelectedCities(selectedCites.filter(({ id }) => id !== bubble.id));
   };
 
+  const handleReset = () => {
+    setCities([]);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -65,7 +69,7 @@ export default function App() {
           ))}
         </BubbleSelect>
         <View style={styles.footer}>
-          <Button title="Reset" onPress={() => setCities([])} />
+          <Button title="Reset" onPress={handleReset} />
           <Button title="Add" onPress={addCity} />
         </View>
       </View>
