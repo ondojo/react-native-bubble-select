@@ -13,6 +13,7 @@ export type BubbleSelectProps = Omit<BubbleProps, 'text' | 'id'> & {
   style?: object;
   width?: number;
   height?: number;
+  backgroundColor?: string;
 };
 
 const BubbleSelect = ({
@@ -24,6 +25,7 @@ const BubbleSelect = ({
   bubbleSize,
   width = 200,
   height = 200,
+  backgroundColor,
   ...bubbleProps
 }: BubbleSelectProps) => {
   const defaultStyle = {
@@ -51,6 +53,7 @@ const BubbleSelect = ({
       onSelect={handleSelect}
       onDeselect={handleDeselect}
       bubbleSize={bubbleSize}
+      magneticBackgroundColor={backgroundColor}
     >
       {React.Children.map(children, (child: any) =>
         React.cloneElement(child, bubbleProps)

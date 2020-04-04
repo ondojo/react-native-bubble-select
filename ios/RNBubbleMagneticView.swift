@@ -24,8 +24,9 @@ class RNBubbleMagneticView: UIView {
     let magneticView = MagneticView()
     magnetic = magneticView.magnetic
     magnetic.magneticDelegate = self
-    // magnetic.scene?.view?.showsFPS = true
-    // magnetic.scene?.view?.showsPhysics = true
+//    magnetic.scene?.view?.showsFPS = true
+//    magnetic.scene?.view?.showsPhysics = true
+//    magnetic.scene?.view?.showsNodeCount = true
     magneticView.frame = frame
     magneticView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     return magneticView
@@ -48,6 +49,7 @@ class RNBubbleMagneticView: UIView {
   
   override public func insertReactSubview(_ subview: UIView!, at atIndex: Int) {
     guard let subview = subview as? RNBubbleSelectNodeView else { return }
+    subview.updateNode()
     magnetic.addChild(subview.node)
   }
   
@@ -70,6 +72,10 @@ extension RNBubbleMagneticView {
   
   @objc func setOnDeselect(_ onDeselect: RCTDirectEventBlock?) {
     self.onDeselect = onDeselect
+  }
+  
+  @objc func setMagneticBackgroundColor(_ magneticBackgroundColor: UIColor?) {
+    self.magneticBackgroundColor = magneticBackgroundColor ?? .white
   }
 }
 
