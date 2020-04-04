@@ -25,7 +25,11 @@ export default function App() {
   }, [force]);
 
   React.useEffect(() => {
-    setForce(true);
+    if (Platform.OS === 'ios') {
+      setForce(true);
+    } else {
+      setCities(randomCities());
+    }
   }, []);
 
   const addCity = () => {
@@ -50,7 +54,10 @@ export default function App() {
         <View style={styles.header}>
           <Text style={styles.title}>Discover New Cities</Text>
           <Text style={styles.message}>
-            Tap on the places you love, hold on the places you don't.
+            {Platform.select({
+              ios: "Tap on the places you love, hold on the places you don't.",
+              android: 'Tap on the places you love.',
+            })}
           </Text>
           {selectedCites.length > 0 ? (
             <Text style={styles.selectedCity}>
@@ -65,8 +72,10 @@ export default function App() {
           height={height}
           fontName={Platform.select({
             ios: 'SinhalaSangamMN-Bold',
+            android: 'sans-serif-medium',
           })}
           fontSize={16}
+          bubbleSize={30}
         >
           {cities.map(city => (
             <Bubble
@@ -94,6 +103,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   header: {
     flexDirection: 'column',
@@ -112,6 +122,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingLeft: 50,
     paddingRight: 50,
+    marginBottom: Platform.select({
+      android: 50,
+    }),
   },
   message: {},
   selectedCity: {
