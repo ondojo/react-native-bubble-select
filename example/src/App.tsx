@@ -44,10 +44,6 @@ export default function App() {
     setSelectedCities(selectedCites.filter(({ id }) => id !== bubble.id));
   };
 
-  const handleReset = () => {
-    setCities([]);
-  };
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
