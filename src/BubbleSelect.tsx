@@ -19,6 +19,7 @@ export type BubbleSelectProps = Omit<BubbleProps, 'text' | 'id'> & {
   height?: number;
   backgroundColor?: string;
   maxSelectedItems?: number;
+  initialSelection?: string[];
 };
 
 const BubbleSelect = ({
@@ -32,6 +33,7 @@ const BubbleSelect = ({
   height = 200,
   backgroundColor,
   maxSelectedItems,
+  initialSelection = [],
   ...bubbleProps
 }: BubbleSelectProps) => {
   const defaultStyle = {
@@ -52,14 +54,16 @@ const BubbleSelect = ({
     }
   };
 
-  const androidProps = Platform.select({
+  const platformProps = Platform.select({
     android: {
       onSelectNode: handleSelect,
       onDeselectNode: handleDeselect,
-      onRemoveNode: onRemove,
       bubbleSize,
       backgroundColor,
       maxSelectedItems,
+    },
+    ios: {
+      initialSelection,
     },
     default: {},
   });
@@ -72,7 +76,7 @@ const BubbleSelect = ({
       onDeselect={handleDeselect}
       bubbleSize={bubbleSize}
       magneticBackgroundColor={backgroundColor}
-      {...androidProps}
+      {...platformProps}
     >
       {React.Children.map(children, (child: any) =>
         React.cloneElement(child, bubbleProps)

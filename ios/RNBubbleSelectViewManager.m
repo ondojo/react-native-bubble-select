@@ -15,5 +15,6 @@ RCT_EXPORT_VIEW_PROPERTY(onSelect, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDeselect, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(allowsMultipleSelection, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(magneticBackgroundColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(initialSelection, NSArray*)
 
 @end
