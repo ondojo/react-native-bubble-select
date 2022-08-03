@@ -33,7 +33,7 @@ const BubbleSelect = ({
   children,
   bubbleSize,
   onRemove,
-  removeOnLongPress = false,
+  removeOnLongPress = true,
   longPressDuration,
   width = 200,
   height = 200,
