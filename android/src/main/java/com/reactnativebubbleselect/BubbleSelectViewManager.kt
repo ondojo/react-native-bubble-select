@@ -55,9 +55,6 @@ class BubbleSelectViewManager: ViewGroupManager<BubbleSelectView>() {
       .put(BubbleDeselectNodeEvent.EVENT_NAME, MapBuilder.of(
         "registrationName", "onDeselectNode"
       ))
-      .put(BubbleRemoveNodeEvent.EVENT_NAME, MapBuilder.of(
-        "registrationName", "onRemoveNode"
-      ))
       .build()
   }
 
