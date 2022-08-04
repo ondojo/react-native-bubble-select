@@ -33,7 +33,6 @@ const BubbleSelect = ({
   };
 
   const handleSelect = (event: NativeSyntheticEvent<BubbleNode>) => {
-    console.log(event);
     if (onSelect) {
       onSelect(event.nativeEvent);
     }
