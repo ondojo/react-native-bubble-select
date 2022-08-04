@@ -32,6 +32,7 @@ class BubbleSelectView(context: ReactContext): FrameLayout(context), LifecycleEv
         return PickerItem().apply {
           val node = nodes[position]
           title = node.text
+          id = node.id
           if (node.fontFamily !== null) {
             typeface = Typeface.create(node.fontFamily, node.fontStyle)
           }
@@ -73,7 +74,7 @@ class BubbleSelectView(context: ReactContext): FrameLayout(context), LifecycleEv
 
   private fun findNode(item: PickerItem): BubbleSelectNodeView? {
     return nodes.find {
-      it.text == item.title
+      it.id == item.id
     }
   }
 
@@ -87,11 +88,7 @@ class BubbleSelectView(context: ReactContext): FrameLayout(context), LifecycleEv
   }
 
   override fun onBubbleSelected(item: PickerItem) {
-    println("Selected item")
-    System.out.println("hi")
     val node = findNode(item) ?: return
-    println(node.text)
-    println(node.id)
     val event = BubbleSelectNodeEvent(bubblePicker.id)
     event.node = node
     println(event.eventName)
