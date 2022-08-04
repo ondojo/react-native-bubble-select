@@ -11,7 +11,6 @@ import SpriteKit
 @objc public protocol MagneticDelegate: class {
     func magnetic(_ magnetic: Magnetic, didSelect node: Node)
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node)
-    @objc optional func magnetic(_ magnetic: Magnetic, didRemove node: Node)
 }
 
 @objcMembers open class Magnetic: SKScene {
@@ -31,30 +30,20 @@ import SpriteKit
     open var allowsMultipleSelection: Bool = true
     
     
-    /**
-    Controls whether an item can be removed by holding down
-     */
-    open var removeNodeOnLongPress: Bool = false
-    
-    /**
-     The length of time (in seconds) the node must be held on to trigger a remove event
-     */
-    open var longPressDuration: TimeInterval = 0.35
-    
     open var isDragging: Bool = false
-    
+  
+    /**
+   Returns the magnetic nodes
+   */
+    open var nodes: [Node] {
+        return children.compactMap { $0 as? Node }
+    }
+  
     /**
      The selected children.
      */
     open var selectedChildren: [Node] {
-        return children.compactMap { $0 as? Node }.filter { $0.isSelected }
-    }
-    
-    /**
-     The removed children.
-     */
-    open var removedChildren: [Node] {
-        return children.compactMap { $0 as? Node }.filter { $0.isRemoved }
+        return nodes.filter { $0.isSelected }
     }
     
     /**
@@ -122,11 +111,6 @@ import SpriteKit
 
 extension Magnetic {
     
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard removeNodeOnLongPress, let touch = touches.first else { return }
-        touchStarted = touch.timestamp
-    }
-    
     override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
@@ -145,20 +129,6 @@ extension Magnetic {
         defer { isDragging = false }
         guard !isDragging, let node = node(at: location) else { return }
                 
-        if removeNodeOnLongPress && !node.isSelected {
-            guard let touchStarted = touchStarted else { return }
-            let touchEnded = touch.timestamp
-            let timeDiff = touchEnded - touchStarted
-            
-            if (timeDiff >= longPressDuration) {
-                node.removedAnimation {
-                    node.isRemoved = true
-                    self.magneticDelegate?.magnetic?(self, didRemove: node)
-                }
-                return
-            }
-        }
-        
         if node.isSelected {
             node.isSelected = false
             magneticDelegate?.magnetic(self, didDeselect: node)

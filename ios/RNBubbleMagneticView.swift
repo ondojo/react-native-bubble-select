@@ -67,11 +67,6 @@ class RNBubbleMagneticView: UIView {
     subview.updateNode()
     magnetic.addChild(subview.node)
   }
-  
-  public override func removeReactSubview(_ subview: UIView!) {
-    guard let subview = subview as? RNBubbleSelectNodeView else { return }
-    subview.node.removeFromParent()
-  }
 }
 
 // MARK: - Setters

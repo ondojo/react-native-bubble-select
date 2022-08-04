@@ -14,12 +14,6 @@ extension MagneticView {
     magnetic.addChild(subview.node)
   }
   
-  public override func removeReactSubview(_ subview: UIView!) {
-    guard let subview = subview as? RNBubbleSelectNodeView else { return }
-    subview.node.removeFromParent()
-  }
-  
-  
   // Stub functions to make sure RN works
   @objc func setOnSelect(_ onSelectNode: RCTDirectEventBlock?) {
   }

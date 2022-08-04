@@ -74,11 +74,6 @@ import SpriteKit
     }
     
     /**
-     The removal state of the node
-     */
-    open var isRemoved: Bool = false
-    
-    /**
      Controls whether the node should auto resize to fit its content
      */
     open var scaleToFitContent: Bool = Defaults.scaleToFitContent {
@@ -256,12 +251,6 @@ import SpriteKit
         self.color = color
     }
     
-    override open func removeFromParent() {
-        removedAnimation() {
-            super.removeFromParent()
-        }
-    }
-  
     /**
      Resizes the node to fit its current content
      */
@@ -349,17 +338,6 @@ import SpriteKit
         }
 
         self.fillTexture = nil
-    }
-    
-    /**
-     The animation to execute when the node is removed.
-     
-     - important: You must call the completion block.
-     
-     - parameter completion: The block to execute when the animation is complete. You must call this handler and should do so as soon as possible.
-     */
-    open func removedAnimation(completion: @escaping () -> Void) {
-        run(.group([.fadeOut(withDuration: animationDuration), .scale(to: 0, duration: animationDuration)]), completion: completion)
     }
     
 }
