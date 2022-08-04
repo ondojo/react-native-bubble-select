@@ -7,11 +7,16 @@
 
 import Foundation
 import UIKit
-import Magnetic
 
 class RNBubbleMagneticView: UIView {
   var magnetic: Magnetic!
-  var allowsMultipleSelection: Bool?
+  
+  var allowsMultipleSelection: Bool = true {
+    didSet {
+      magnetic.allowsMultipleSelection = allowsMultipleSelection
+    }
+  }
+  
   var onSelect: RCTDirectEventBlock?
   var onDeselect: RCTDirectEventBlock?
   
@@ -70,7 +75,6 @@ extension RNBubbleMagneticView {
 
 extension RNBubbleMagneticView: MagneticDelegate {
   func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
-    guard let node = node as? EnchancedNode else { return }
     onSelect?([
       "text": node.text ?? "",
       "id": node.id ?? ""
@@ -78,7 +82,6 @@ extension RNBubbleMagneticView: MagneticDelegate {
   }
 
   func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
-    guard let node = node as? EnchancedNode else { return }
     onDeselect?([
       "text": node.text ?? "",
       "id": node.id ?? ""
