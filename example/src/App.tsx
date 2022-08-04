@@ -48,11 +48,11 @@ export default function App() {
   };
 
   const handleSelect = (bubble: BubbleNode) => {
-    Alert.alert(`Selected bubble: ${bubble.text} with id: ${bubble.id}`);
+    Alert.alert('', `Selected bubble: ${bubble.text} with id: ${bubble.id}`);
   };
 
   const handleDeselect = (bubble: BubbleNode) => {
-    Alert.alert(`Deselected bubble: ${bubble.text} with id: ${bubble.id}`);
+    Alert.alert('', `Deselected bubble: ${bubble.text} with id: ${bubble.id}`);
   };
 
   return (
