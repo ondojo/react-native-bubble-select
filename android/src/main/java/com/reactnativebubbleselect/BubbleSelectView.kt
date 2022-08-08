@@ -39,6 +39,7 @@ class BubbleSelectView(context: ReactContext): FrameLayout(context), LifecycleEv
             typeface = Typeface.create(node.fontFamily, node.fontStyle)
           }
           textColor = Color.parseColor(node.fontColor)
+          selectedTextColor = Color.parseColor(node.selectedFontColor)
 
           if (node.gradient !== null) {
             gradient = node.getGradient();
@@ -46,6 +47,11 @@ class BubbleSelectView(context: ReactContext): FrameLayout(context), LifecycleEv
             gradient = BubbleGradient(
               Color.parseColor(node.color),
               Color.parseColor(node.color),
+              BubbleGradient.VERTICAL
+            )
+            selectedGradient = BubbleGradient(
+              Color.parseColor(node.selectedColor),
+              Color.parseColor(node.selectedColor),
               BubbleGradient.VERTICAL
             )
           }

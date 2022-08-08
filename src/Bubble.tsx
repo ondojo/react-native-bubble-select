@@ -84,6 +84,7 @@ const Bubble = ({
       fontFamily: fontName,
       fontSize,
       fontColor,
+      selectedFontColor,
       fontStyle,
       gradient,
     },

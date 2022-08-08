@@ -42,6 +42,12 @@ class BubbleSelectNodeViewManager: SimpleViewManager<BubbleSelectNodeView>() {
     view.fontColor = fontColor
   }
 
+  @ReactProp(name = "selectedFontColor")
+  fun setSelectedFontColor(view: BubbleSelectNodeView, selectedFontColor: String?) {
+    if (selectedFontColor == null) return;
+    view.selectedFontColor = selectedFontColor
+  }
+
   @ReactProp(name = "color")
   fun setColor(view: BubbleSelectNodeView, color: String?) {
     view.color = color
