@@ -15,6 +15,7 @@ class BubbleSelectNodeView(context: ReactContext): LinearLayout(context) {
   var fontSize: Float = 14f
   var fontColor: String = "#ffffff"
   var color: String? = null
+  var selectedColor: String? = null
   var gradient: ReadableMap? = null
 
   init {
