@@ -79,6 +79,7 @@ const Bubble = ({
     android: {
       text,
       color,
+      selectedColor,
       id,
       fontFamily: fontName,
       fontSize,

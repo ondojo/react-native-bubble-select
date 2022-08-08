@@ -46,6 +46,11 @@ class BubbleSelectNodeViewManager: SimpleViewManager<BubbleSelectNodeView>() {
   fun setColor(view: BubbleSelectNodeView, color: String?) {
     view.color = color
   }
+  
+  @ReactProp(name = "selectedColor")
+  fun setSelectedColor(view: BubbleSelectNodeView, selectedColor: String?) {
+    view.selectedColor = selectedColor
+  }
 
   @ReactProp(name = "gradient")
   fun setGradient(view: BubbleSelectNodeView, gradient: ReadableMap?) {
